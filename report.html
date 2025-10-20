@@ -1,57 +1,155 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PPSS Report</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <aside class="sidebar" aria-label="Primary navigation">
-    <div class="sidebar__logo">PPSS</div>
-    <nav class="nav">
-      <a class="nav__link" href="home.html">
-        <span class="nav__icon" aria-hidden="true">🏠</span>
-        <span>Home</span>
-      </a>
-      <a class="nav__link" href="workspace.html">
-        <span class="nav__icon" aria-hidden="true">🧩</span>
-        <span>Workspace</span>
-      </a>
-      <a class="nav__link nav__link--active" href="report.html" aria-current="page">
-        <span class="nav__icon" aria-hidden="true">📊</span>
-        <span>Report</span>
-      </a>
-      <a class="nav__link" href="index.html">
-        <span class="nav__icon" aria-hidden="true">🧭</span>
-        <span>Index</span>
-      </a>
-      <a class="nav__link" href="settings.html">
-        <span class="nav__icon" aria-hidden="true">⚙️</span>
-        <span>Settings</span>
-      </a>
-    </nav>
-  </aside>
-
-  <main class="main">
-    <header class="main__header">
-      <h1 class="main__title">Policy Reporting</h1>
-      <p class="main__subtitle">Consolidate analytics, deliberation history, and export-ready documents to support evidence-based governance.</p>
-    </header>
-
-    <section class="section-card">
-      <h2>Data Insights</h2>
-      <p>Dashboards surface automated statistics, sentiment trends, and KPI deltas across PPSS missions. Highlighted metrics track changes week-over-week to inform committee updates.</p>
-    </section>
-
-    <section class="section-card">
-      <h2>Decision Log</h2>
-      <ul>
-        <li>2025-03-05: Incorporated community hearing outcomes for the housing package.</li>
-        <li>2025-03-07: Selected Scenario B for budget allocation following AI-supported modeling.</li>
-        <li>2025-03-09: Completed legal review and recorded submission approval.</li>
-      </ul>
-    </section>
-  </main>
-</body>
-</html>
+diff --git a/report.html b/report.html
+new file mode 100644
+index 0000000000000000000000000000000000000000..e1a9c5be7dc08bfa298c1b077c080a6b484b65d1
+--- /dev/null
++++ b/report.html
+@@ -0,0 +1,149 @@
++<!DOCTYPE html>
++<html lang="en">
++<head>
++  <meta charset="UTF-8">
++  <meta name="viewport" content="width=device-width, initial-scale=1.0">
++  <title>PPSS Report</title>
++  <link rel="stylesheet" href="styles.css">
++</head>
++<body>
++  <aside class="sidebar" aria-label="Primary navigation">
++    <div class="sidebar__logo">PPSS</div>
++    <nav class="nav">
++      <a class="nav__link" href="home.html">
++        <span class="nav__icon" aria-hidden="true">🏠</span>
++        <span>Home</span>
++      </a>
++      <a class="nav__link" href="workspace.html">
++        <span class="nav__icon" aria-hidden="true">🧩</span>
++        <span>Workspace</span>
++      </a>
++      <a class="nav__link nav__link--active" href="report.html" aria-current="page">
++        <span class="nav__icon" aria-hidden="true">📊</span>
++        <span>Report</span>
++      </a>
++      <a class="nav__link" href="index.html">
++        <span class="nav__icon" aria-hidden="true">🧭</span>
++        <span>Index</span>
++      </a>
++      <a class="nav__link" href="settings.html">
++        <span class="nav__icon" aria-hidden="true">⚙️</span>
++        <span>Settings</span>
++      </a>
++    </nav>
++  </aside>
++
++  <main class="main">
++    <header class="main__header">
++      <h1 class="main__title">Policy Reporting</h1>
++      <p class="main__subtitle">Consolidate analytics, deliberation history, and export-ready documents to support evidence-based governance.</p>
++    </header>
++
++    <section class="section-card">
++      <h2>ChatGPT Stage Summaries</h2>
++      <p>Workspace dialogues are distilled into executive-ready highlights to keep the PPSS team aligned across every stage.</p>
++      <ul class="summary-list" id="stage-summary-list" aria-live="polite"></ul>
++    </section>
++
++    <section class="section-card">
++      <h2>Data Insights</h2>
++      <p>Dashboards surface automated statistics, sentiment trends, and KPI deltas across PPSS missions. Highlighted metrics track changes week-over-week to inform committee updates.</p>
++    </section>
++
++    <section class="section-card">
++      <h2>Decision Log</h2>
++      <ul>
++        <li>2025-03-05: Incorporated community hearing outcomes for the housing package.</li>
++        <li>2025-03-07: Selected Scenario B for budget allocation following AI-supported modeling.</li>
++        <li>2025-03-09: Completed legal review and recorded submission approval.</li>
++      </ul>
++    </section>
++  </main>
++
++  <script>
++    const SUMMARY_STORAGE_KEY = 'ppssWorkspaceSummaries';
++    const stageOrder = [
++      'problem-definition',
++      'data-analysis',
++      'design-plan-alternatives',
++      'design-plan-evaluation-1',
++      'design-plan-evaluation-2'
++    ];
++    const stageLabels = {
++      'problem-definition': 'Problem Definition',
++      'data-analysis': 'Data Analysis',
++      'design-plan-alternatives': 'Design/Plan Alternatives',
++      'design-plan-evaluation-1': 'Design/Plan Evaluation',
++      'design-plan-evaluation-2': 'Design/Plan Evaluation (Reporting)'
++    };
++
++    function getStoredSummaries() {
++      if (typeof localStorage === 'undefined') {
++        return {};
++      }
++
++      try {
++        const stored = JSON.parse(localStorage.getItem(SUMMARY_STORAGE_KEY));
++        if (stored && typeof stored === 'object') {
++          return stored;
++        }
++      } catch (error) {
++        console.error('Unable to read workspace summaries.', error);
++      }
++
++      return {};
++    }
++
++    function renderSummaryList() {
++      const list = document.getElementById('stage-summary-list');
++      if (!list) {
++        return;
++      }
++
++      const summaries = getStoredSummaries();
++      list.innerHTML = '';
++
++      const hasSummaries = stageOrder.some((stageId) => typeof summaries[stageId] === 'string' && summaries[stageId].trim().length > 0);
++
++      if (!hasSummaries) {
++        const emptyItem = document.createElement('li');
++        emptyItem.className = 'summary-list__empty';
++        emptyItem.textContent = 'ChatGPT summaries will appear here after you collaborate within the workspace.';
++        list.appendChild(emptyItem);
++        return;
++      }
++
++      stageOrder.forEach((stageId) => {
++        const summary = typeof summaries[stageId] === 'string' ? summaries[stageId].trim() : '';
++        if (!summary) {
++          return;
++        }
++
++        const item = document.createElement('li');
++        item.className = 'summary-list__item';
++
++        const title = document.createElement('h3');
++        title.className = 'summary-list__title';
++        title.textContent = stageLabels[stageId] || stageId;
++        item.appendChild(title);
++
++        const body = document.createElement('p');
++        body.className = 'summary-list__body';
++        body.textContent = summary;
++        item.appendChild(body);
++
++        list.appendChild(item);
++      });
++    }
++
++    renderSummaryList();
++    window.addEventListener('storage', (event) => {
++      if (event.key === SUMMARY_STORAGE_KEY) {
++        renderSummaryList();
++      }
++    });
++
++    window.addEventListener('ppss-summary-updated', renderSummaryList);
++  </script>
++</body>
++</html>
