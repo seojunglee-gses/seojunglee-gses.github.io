@@ -1,11 +1,68 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>내 첫 웹사이트</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PPSS Platform Prototype</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Hello, GitHub Pages!</h1>
-  <p>이 페이지는 내가 처음 만든 웹사이트입니다 🎉</p>
+  <aside class="sidebar" aria-label="Primary navigation">
+    <div class="sidebar__logo">PPSS</div>
+    <nav class="nav">
+      <a class="nav__link" href="home.html">
+        <span class="nav__icon" aria-hidden="true">🏠</span>
+        <span>Home</span>
+      </a>
+      <a class="nav__link" href="workspace.html">
+        <span class="nav__icon" aria-hidden="true">🧩</span>
+        <span>Workspace</span>
+      </a>
+      <a class="nav__link" href="report.html">
+        <span class="nav__icon" aria-hidden="true">📊</span>
+        <span>Report</span>
+      </a>
+      <a class="nav__link nav__link--active" href="index.html" aria-current="page">
+        <span class="nav__icon" aria-hidden="true">🧭</span>
+        <span>Index</span>
+      </a>
+      <a class="nav__link" href="settings.html">
+        <span class="nav__icon" aria-hidden="true">⚙️</span>
+        <span>Settings</span>
+      </a>
+    </nav>
+  </aside>
+
+  <main class="main">
+    <header class="main__header">
+      <h1 class="main__title">PPSS Index</h1>
+      <p class="main__subtitle">Use the vertical sidebar to open each workspace. This index outlines how the ChatGPT-assisted Policy Planning Support System (PPSS) organizes collaboration, data, and governance.</p>
+    </header>
+
+    <section class="section-card">
+      <h2>Platform Overview</h2>
+      <p>The PPSS platform coordinates co-design across policy planners, community partners, and AI copilots. It combines assisted briefing, persona management, scenario authoring, and transparent decision logs inspired by Sections 3 and 4 of the reference paper.</p>
+    </section>
+
+    <section class="section-card">
+      <h2>Core Screens</h2>
+      <ul>
+        <li><strong>Home:</strong> A shared dashboard for announcements, AI-generated briefs, and quick entry points into current missions.</li>
+        <li><strong>Workspace:</strong> A co-creation board that surfaces personas, prompts AI ideation, and tracks design backlogs.</li>
+        <li><strong>Report:</strong> A reporting hub that consolidates insights, governance checkpoints, and export-ready documents.</li>
+        <li><strong>Settings:</strong> Administrative controls that configure roles, workflow policies, and assistant behaviors.</li>
+      </ul>
+    </section>
+
+    <section class="section-card">
+      <h2>Suggested Flow</h2>
+      <ul>
+        <li>Begin on Home to review a refreshed policy brief and commit to the collaboration cadence.</li>
+        <li>Move to Workspace to align personas, co-edit journeys, and iterate on AI-assisted scenarios.</li>
+        <li>Publish outcomes through Report, using PPSS templates that highlight deliberation history.</li>
+        <li>Return to Settings to fine-tune permissions or data integrations after each project milestone.</li>
+      </ul>
+    </section>
+  </main>
 </body>
 </html>
