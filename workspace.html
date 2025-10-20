@@ -1,765 +1,759 @@
-diff --git a/workspace.html b/workspace.html
-new file mode 100644
-index 0000000000000000000000000000000000000000..f47fdc7455a8deea1bdcefd57c94ed509cb6dfd3
---- /dev/null
-+++ b/workspace.html
-@@ -0,0 +1,759 @@
-+<!DOCTYPE html>
-+<html lang="en">
-+<head>
-+  <meta charset="UTF-8">
-+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-+  <title>PPSS Workspace</title>
-+  <link rel="stylesheet" href="styles.css">
-+</head>
-+<body>
-+  <aside class="sidebar" aria-label="Primary navigation">
-+    <div class="sidebar__logo">PPSS</div>
-+    <nav class="nav">
-+      <a class="nav__link" href="home.html">
-+        <span class="nav__icon" aria-hidden="true">🏠</span>
-+        <span>Home</span>
-+      </a>
-+      <a class="nav__link nav__link--active" href="workspace.html" aria-current="page">
-+        <span class="nav__icon" aria-hidden="true">🧩</span>
-+        <span>Workspace</span>
-+      </a>
-+      <a class="nav__link" href="report.html">
-+        <span class="nav__icon" aria-hidden="true">📊</span>
-+        <span>Report</span>
-+      </a>
-+      <a class="nav__link" href="index.html">
-+        <span class="nav__icon" aria-hidden="true">🧭</span>
-+        <span>Index</span>
-+      </a>
-+      <a class="nav__link" href="settings.html">
-+        <span class="nav__icon" aria-hidden="true">⚙️</span>
-+        <span>Settings</span>
-+      </a>
-+    </nav>
-+  </aside>
-+
-+  <main class="main">
-+    <header class="main__header">
-+      <h1 class="main__title">Design Collaboration Workspace</h1>
-+      <p class="main__subtitle">Navigate the PPSS workflow, track which phase you are working on, and co-create policy responses with ChatGPT.</p>
-+    </header>
-+
-+    <div class="stepper" role="tablist" aria-label="Workspace stages">
-+      <button class="stepper__item stepper__item--active" type="button" role="tab" aria-selected="true" data-stage="problem-definition">
-+        <span class="stepper__icon" aria-hidden="true">🎯</span>
-+        <span class="stepper__badge" aria-hidden="true">1</span>
-+        <span class="stepper__label">Problem Definition</span>
-+      </button>
-+      <button class="stepper__item" type="button" role="tab" aria-selected="false" data-stage="data-analysis">
-+        <span class="stepper__icon" aria-hidden="true">📊</span>
-+        <span class="stepper__badge" aria-hidden="true">2</span>
-+        <span class="stepper__label">Data Analysis</span>
-+      </button>
-+      <button class="stepper__item" type="button" role="tab" aria-selected="false" data-stage="design-plan-alternatives">
-+        <span class="stepper__icon" aria-hidden="true">🎨</span>
-+        <span class="stepper__badge" aria-hidden="true">3</span>
-+        <span class="stepper__label">Design/Plan Alternatives</span>
-+      </button>
-+      <button class="stepper__item" type="button" role="tab" aria-selected="false" data-stage="design-plan-evaluation-1">
-+        <span class="stepper__icon" aria-hidden="true">🧪</span>
-+        <span class="stepper__badge" aria-hidden="true">4</span>
-+        <span class="stepper__label">Design/Plan Evaluation</span>
-+      </button>
-+      <button class="stepper__item" type="button" role="tab" aria-selected="false" data-stage="design-plan-evaluation-2">
-+        <span class="stepper__icon" aria-hidden="true">📈</span>
-+        <span class="stepper__badge" aria-hidden="true">5</span>
-+        <span class="stepper__label">Design/Plan Evaluation</span>
-+      </button>
-+    </div>
-+    <div class="stepper-progress" aria-hidden="true">
-+      <div class="stepper-progress__bar" style="width: 20%"></div>
-+    </div>
-+
-+    <div class="workspace-layout">
-+      <section class="workspace-panel workspace-panel--input" aria-live="polite">
-+        <article class="workspace-stage workspace-stage--active" data-stage="problem-definition">
-+          <div class="stage-hero">
-+            <img class="stage-hero__image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 220'%3E%3Cdefs%3E%3ClinearGradient id='a' x1='0'%25 y1='0'%25 x2='100'%25 y2='100'%25%3E%3Cstop offset='0'%25 stop-color='%23e0f2ff'/%3E%3Cstop offset='100'%25 stop-color='%2397b5ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23a)' width='320' height='220' rx='18'/%3E%3Cpath fill='%23fff' opacity='.6' d='M48 60h224v18H48zm0 42h176v18H48zm0 42h128v18H48z'/%3E%3C/svg%3E" alt="Illustration representing policy problem framing">
-+            <div class="stage-hero__body">
-+              <h2 class="workspace-panel__title">Problem Definition</h2>
-+              <p class="stage-hero__lead">Frame the policy design challenge with aligned intent, shared evidence, and human stories from the PPSS ecosystem.</p>
-+              <ul class="stage-hero__list">
-+                <li>Summarize the community pain points and urgency for intervention.</li>
-+                <li>Document stakeholder mandates and the desired system-level outcomes.</li>
-+                <li>Capture current policies, gaps, and success measures to explore with ChatGPT.</li>
-+              </ul>
-+            </div>
-+          </div>
-+          <section class="stage-notes" aria-label="Problem framing notes">
-+            <h3 class="stage-notes__title">Insight Notebook</h3>
-+            <textarea class="stage-notes__textarea" id="problem-insights" name="problem-insights" rows="6" placeholder="Record narrative insights, field observations, and quotes that should inform the design brief."></textarea>
-+          </section>
-+        </article>
-+
-+        <article class="workspace-stage" data-stage="data-analysis" hidden>
-+          <h2 class="workspace-panel__title">Data Analysis</h2>
-+          <p class="workspace-panel__intro">Switch between the analytic perspectives that guide how PPSS intelligence is interpreted for the case study.</p>
-+          <div class="analysis-tabs" role="tablist" aria-label="Data analysis perspectives">
-+            <button class="analysis-tabs__button analysis-tabs__button--active" type="button" role="tab" aria-selected="true" data-analysis-tab="sources">Evidence Sources</button>
-+            <button class="analysis-tabs__button" type="button" role="tab" aria-selected="false" data-analysis-tab="signals">Emerging Signals</button>
-+            <button class="analysis-tabs__button" type="button" role="tab" aria-selected="false" data-analysis-tab="dashboards">Dashboards</button>
-+          </div>
-+          <div class="analysis-panels">
-+            <article class="analysis-panel analysis-panel--active" data-analysis-panel="sources">
-+              <img class="analysis-panel__image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 200'%3E%3Cdefs%3E%3ClinearGradient id='b' x1='0'%25 y1='0'%25 x2='100'%25 y2='0'%25%3E%3Cstop offset='0'%25 stop-color='%23d4f4f6'/%3E%3Cstop offset='100'%25 stop-color='%2382d6ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='320' height='200' rx='16' fill='url(%23b)'/%3E%3Ccircle cx='84' cy='96' r='48' fill='%23fff' opacity='.6'/%3E%3Crect x='152' y='60' width='120' height='28' rx='12' fill='%23fff' opacity='.8'/%3E%3Crect x='152' y='108' width='96' height='24' rx='10' fill='%23fff' opacity='.8'/%3E%3Crect x='152' y='148' width='72' height='20' rx='8' fill='%23fff' opacity='.8'/%3E%3C/svg%3E" alt="Illustration showing layered datasets">
-+              <div class="analysis-panel__body">
-+                <h3 class="analysis-panel__title">Evidence Sources</h3>
-+                <p>Combine PPSS operational data, socio-economic indicators, and resident feedback to build a comprehensive picture of the challenge environment.</p>
-+                <ul class="analysis-panel__list">
-+                  <li>Import structured datasets directly from the PPSS warehouse.</li>
-+                  <li>Tag qualitative transcripts with policy-relevant sentiments.</li>
-+                  <li>Summarize baseline metrics for fast comparison later.</li>
-+                </ul>
-+              </div>
-+            </article>
-+            <article class="analysis-panel" data-analysis-panel="signals" hidden>
-+              <img class="analysis-panel__image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 200'%3E%3Cdefs%3E%3ClinearGradient id='c' x1='0'%25 y1='100'%25 x2='100'%25 y2='0'%25%3E%3Cstop offset='0'%25 stop-color='%23ffe3ee'/%3E%3Cstop offset='100'%25 stop-color='%23ff9ad5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='320' height='200' rx='16' fill='url(%23c)'/%3E%3Cpolyline fill='none' stroke='%23fff' stroke-width='6' stroke-linecap='round' stroke-linejoin='round' points='40,150 96,92 164,132 228,64 280,118' opacity='.8'/%3E%3Ccircle cx='96' cy='92' r='10' fill='%23fff'/%3E%3Ccircle cx='164' cy='132' r='10' fill='%23fff'/%3E%3Ccircle cx='228' cy='64' r='10' fill='%23fff'/%3E%3C/svg%3E" alt="Line graph illustrating emerging signals">
-+              <div class="analysis-panel__body">
-+                <h3 class="analysis-panel__title">Emerging Signals</h3>
-+                <p>Track anomalies and trend breaks to see where interventions should be prioritized and which communities require rapid support.</p>
-+                <ul class="analysis-panel__list">
-+                  <li>Surface outliers from weekly PPSS sentiment monitoring.</li>
-+                  <li>Identify neighborhoods with compounding risks.</li>
-+                  <li>Flag policies that trigger unintended consequences.</li>
-+                </ul>
-+              </div>
-+            </article>
-+            <article class="analysis-panel" data-analysis-panel="dashboards" hidden>
-+              <img class="analysis-panel__image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 200'%3E%3Cdefs%3E%3ClinearGradient id='d' x1='0'%25 y1='0'%25 x2='100'%25 y2='100'%25%3E%3Cstop offset='0'%25 stop-color='%23f4f1ff'/%3E%3Cstop offset='100'%25 stop-color='%23c9b5ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='320' height='200' rx='16' fill='url(%23d)'/%3E%3Crect x='48' y='52' width='96' height='96' rx='12' fill='%23fff' opacity='.85'/%3E%3Crect x='168' y='52' width='112' height='28' rx='12' fill='%23fff' opacity='.85'/%3E%3Crect x='168' y='92' width='112' height='56' rx='12' fill='%23fff' opacity='.85'/%3E%3C/svg%3E" alt="Dashboard cards illustration">
-+              <div class="analysis-panel__body">
-+                <h3 class="analysis-panel__title">Dashboards</h3>
-+                <p>Align the team around shared metrics with dashboards that update in real time and translate AI findings into policy-ready evidence.</p>
-+                <ul class="analysis-panel__list">
-+                  <li>Review service accessibility, equity, and fiscal indicators.</li>
-+                  <li>Export snapshots for inclusion in PPSS executive reports.</li>
-+                  <li>Set automated alerts for threshold breaches.</li>
-+                </ul>
-+              </div>
-+            </article>
-+          </div>
-+        </article>
-+
-+        <article class="workspace-stage" data-stage="design-plan-alternatives" hidden>
-+          <h2 class="workspace-panel__title">Design/Plan Alternatives</h2>
-+          <p class="workspace-panel__intro">Co-create visual concepts that communicate how the proposed PPSS interventions could look and feel for residents.</p>
-+          <form class="concept-form" id="concept-form" aria-label="ChatGPT image generation form">
-+            <label class="concept-form__label" for="concept-prompt">Prompt</label>
-+            <textarea class="concept-form__textarea" id="concept-prompt" name="concept-prompt" rows="3" placeholder="Describe the service environment, target persona, and emotion to capture." required></textarea>
-+            <p class="concept-form__hint">ChatGPT will generate four concept images using the Images API and the prompt above.</p>
-+            <div class="concept-form__actions">
-+              <button class="concept-form__submit" type="submit">Generate Concepts</button>
-+              <span class="concept-form__status" id="concept-status" role="status" aria-live="polite"></span>
-+            </div>
-+          </form>
-+          <div class="concept-gallery" id="concept-gallery" aria-live="polite" aria-label="Generated concept gallery">
-+            <p class="concept-gallery__placeholder">Use the ChatGPT image generation integration to visualize alternatives for the PPSS experience.</p>
-+          </div>
-+        </article>
-+
-+        <article class="workspace-stage" data-stage="design-plan-evaluation-1" hidden>
-+          <h2 class="workspace-panel__title">Design/Plan Evaluation</h2>
-+          <p class="workspace-panel__intro">Assess the experiential quality of each alternative using curated reference photos and community review cues.</p>
-+          <div class="evaluation-gallery" role="list">
-+            <figure class="evaluation-card" role="listitem">
-+              <img class="evaluation-card__image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 160'%3E%3Cdefs%3E%3ClinearGradient id='e' x1='0'%25 y1='0'%25 x2='100'%25 y2='100'%25%3E%3Cstop offset='0'%25 stop-color='%23ffe8cc'/%3E%3Cstop offset='100'%25 stop-color='%23ffb347'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='200' height='160' rx='16' fill='url(%23e)'/%3E%3Cpath fill='%23fff' opacity='.75' d='M40 112h120v16H40zM56 56h88l-24 40H32z'/%3E%3C/svg%3E" alt="Service counter prototype">
-+              <figcaption class="evaluation-card__caption">Prototype service counter demonstrating multilingual triage.</figcaption>
-+            </figure>
-+            <figure class="evaluation-card" role="listitem">
-+              <img class="evaluation-card__image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 160'%3E%3Cdefs%3E%3ClinearGradient id='f' x1='0'%25 y1='100'%25 x2='100'%25 y2='0'%25%3E%3Cstop offset='0'%25 stop-color='%23d6f8ff'/%3E%3Cstop offset='100'%25 stop-color='%2364c5ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='200' height='160' rx='16' fill='url(%23f)'/%3E%3Cpath fill='%23fff' opacity='.75' d='M40 64h120v24H40zM40 100h120v16H40zM40 124h72v12H40z'/%3E%3C/svg%3E" alt="Digital service mock-up">
-+              <figcaption class="evaluation-card__caption">Digital intake journey showing accessible PPSS language options.</figcaption>
-+            </figure>
-+            <figure class="evaluation-card" role="listitem">
-+              <img class="evaluation-card__image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 160'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0'%25 y1='0'%25 x2='100'%25 y2='0'%25%3E%3Cstop offset='0'%25 stop-color='%23f5e9ff'/%3E%3Cstop offset='100'%25 stop-color='%23c39bff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='200' height='160' rx='16' fill='url(%23g)'/%3E%3Cpath fill='%23fff' opacity='.75' d='M40 56h120l-40 64H40zM72 120h64v16H72z'/%3E%3C/svg%3E" alt="Community workshop illustration">
-+              <figcaption class="evaluation-card__caption">Community workshop setup emphasizing inclusive facilitation.</figcaption>
-+            </figure>
-+          </div>
-+          <section class="stage-notes" aria-label="Evaluation notes">
-+            <h3 class="stage-notes__title">Resident Review Notes</h3>
-+            <textarea class="stage-notes__textarea" id="evaluation-notes" name="evaluation-notes" rows="5" placeholder="Capture feedback themes, emotional reactions, and priority refinements."></textarea>
-+          </section>
-+        </article>
-+
-+        <article class="workspace-stage" data-stage="design-plan-evaluation-2" hidden>
-+          <h2 class="workspace-panel__title">Design/Plan Evaluation</h2>
-+          <p class="workspace-panel__intro">Translate the validated concept into a policy-ready report with executive signals and operational commitments.</p>
-+          <section class="report-board" aria-label="Report outline">
-+            <header class="report-board__header">
-+              <h3 class="report-board__title">PPSS Policy Impact Report</h3>
-+              <p class="report-board__meta">Draft v1.2 • Prepared for Interagency Steering Committee</p>
-+            </header>
-+            <div class="report-board__section">
-+              <h4 class="report-board__section-title">Executive Summary</h4>
-+              <p>The pilot demonstrates a 24% increase in timely benefits resolution with enhanced equity for linguistically diverse households.</p>
-+            </div>
-+            <div class="report-board__section">
-+              <h4 class="report-board__section-title">Operational Commitments</h4>
-+              <ul>
-+                <li>Deploy PPSS onboarding coaches across five priority districts.</li>
-+                <li>Launch a multilingual notification stream integrated with civic portals.</li>
-+                <li>Institute monthly impact reviews co-led by resident advisors.</li>
-+              </ul>
-+            </div>
-+            <div class="report-board__section">
-+              <h4 class="report-board__section-title">Risk Outlook</h4>
-+              <p>Requires an ethics review for AI recommendations and expanded data-sharing agreements to maintain compliance.</p>
-+            </div>
-+          </section>
-+        </article>
-+      </section>
-+
-+      <section class="workspace-panel workspace-panel--chat" aria-label="Stage companion panel">
-+        <header class="chat-header">
-+          <div>
-+            <h2 class="workspace-panel__title" id="chat-panel-title">ChatGPT Co-Designer</h2>
-+            <p class="workspace-panel__helper" id="chat-panel-helper">Summon design prompts, critique drafts, and convert insights into policy-ready narratives. Conversations are stored per stage.</p>
-+          </div>
-+          <span class="chat-header__stage" id="chat-stage-indicator">Problem Definition</span>
-+        </header>
-+
-+        <div class="chat-stage-analytics" id="chat-stage-analytics" hidden>
-+          <div class="analytics-board">
-+            <h3 class="analytics-board__title">Impact Evidence</h3>
-+            <div class="analytics-board__grid">
-+              <figure class="analytics-card">
-+                <img class="analytics-card__image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 120'%3E%3Cdefs%3E%3ClinearGradient id='h' x1='0'%25 y1='0'%25 x2='100'%25 y2='100'%25%3E%3Cstop offset='0'%25 stop-color='%23dff6ff'/%3E%3Cstop offset='100'%25 stop-color='%2380d6ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='180' height='120' rx='14' fill='url(%23h)'/%3E%3Cpath fill='%23fff' opacity='.8' d='M36 84h108v12H36zM50 36h80l-20 36H30z'/%3E%3C/svg%3E" alt="Report visualization">
-+                <figcaption class="analytics-card__caption">Field deployment photo set capturing resident navigation support.</figcaption>
-+              </figure>
-+              <div class="analytics-metrics">
-+                <div class="analytics-metric">
-+                  <span class="analytics-metric__label">Service Resolution</span>
-+                  <span class="analytics-metric__value">+24%</span>
-+                </div>
-+                <div class="analytics-metric">
-+                  <span class="analytics-metric__label">Equity Score</span>
-+                  <span class="analytics-metric__value">0.86</span>
-+                </div>
-+                <div class="analytics-metric">
-+                  <span class="analytics-metric__label">Budget Variance</span>
-+                  <span class="analytics-metric__value">-3.2%</span>
-+                </div>
-+                <div class="analytics-metric">
-+                  <span class="analytics-metric__label">Resident Satisfaction</span>
-+                  <span class="analytics-metric__value">4.6 / 5</span>
-+                </div>
-+              </div>
-+            </div>
-+          </div>
-+        </div>
-+
-+        <div class="chat-log" id="chat-log" aria-live="polite"></div>
-+
-+        <form class="chat-form" id="chat-form">
-+          <label class="chat-form__label" for="chat-message">Message</label>
-+          <textarea class="chat-form__textarea" id="chat-message" name="chat-message" rows="3" placeholder="Ask for research synthesis, draft an executive summary, or brainstorm co-design activities." required></textarea>
-+          <div class="chat-form__actions">
-+            <button class="chat-form__submit" type="submit">Send to ChatGPT</button>
-+          </div>
-+        </form>
-+        <div class="chat-status" id="chat-status" role="status" aria-live="polite"></div>
-+      </section>
-+    </div>
-+  </main>
-+
-+  <script>
-+    const stepButtons = document.querySelectorAll('.stepper__item');
-+    const stages = document.querySelectorAll('.workspace-stage');
-+    const chatLog = document.getElementById('chat-log');
-+    const chatForm = document.getElementById('chat-form');
-+    const chatTextarea = document.getElementById('chat-message');
-+    const chatStatus = document.getElementById('chat-status');
-+    const chatStageIndicator = document.getElementById('chat-stage-indicator');
-+    const chatPanelTitle = document.getElementById('chat-panel-title');
-+    const chatPanelHelper = document.getElementById('chat-panel-helper');
-+    const chatStageAnalytics = document.getElementById('chat-stage-analytics');
-+    const stepperProgressBar = document.querySelector('.stepper-progress__bar');
-+
-+    const analysisTabButtons = document.querySelectorAll('[data-analysis-tab]');
-+    const analysisPanels = document.querySelectorAll('[data-analysis-panel]');
-+    const conceptForm = document.getElementById('concept-form');
-+    const conceptStatus = document.getElementById('concept-status');
-+    const conceptGallery = document.getElementById('concept-gallery');
-+
-+    const API_KEY = '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';
-+    const CHAT_API_URL = 'https://api.openai.com/v1/chat/completions';
-+    const IMAGE_API_URL = 'https://api.openai.com/v1/images/generations';
-+    const CHAT_MODEL = 'gpt-4o-mini';
-+    const IMAGE_MODEL = 'gpt-image-1';
-+    const conversationStorageKey = 'ppssWorkspaceConversations';
-+    const summaryStorageKey = 'ppssWorkspaceSummaries';
-+    const stageLabels = {
-+      'problem-definition': 'Problem Definition',
-+      'data-analysis': 'Data Analysis',
-+      'design-plan-alternatives': 'Design/Plan Alternatives',
-+      'design-plan-evaluation-1': 'Design/Plan Evaluation',
-+      'design-plan-evaluation-2': 'Design/Plan Evaluation (Reporting)'
-+    };
-+
-+    let activeStage = 'problem-definition';
-+    const conversations = {
-+      'problem-definition': [],
-+      'data-analysis': [],
-+      'design-plan-alternatives': [],
-+      'design-plan-evaluation-1': [],
-+      'design-plan-evaluation-2': []
-+    };
-+    const stageSummaries = {};
-+
-+    const chatStageCopy = {
-+      'problem-definition': {
-+        title: 'ChatGPT Co-Designer',
-+        helper: 'Summon design prompts, critique drafts, and convert insights into policy-ready narratives. Conversations are stored per stage.'
-+      },
-+      'data-analysis': {
-+        title: 'Analytical Copilot',
-+        helper: 'Translate datasets into insight-ready talking points and request scripts for PPSS dashboards or QA checks.'
-+      },
-+      'design-plan-alternatives': {
-+        title: 'Concept Companion',
-+        helper: 'Craft visual prompts, orchestrate ChatGPT image generation, and outline resident journeys for each alternative.'
-+      },
-+      'design-plan-evaluation-1': {
-+        title: 'Evaluation Facilitator',
-+        helper: 'Frame discussion guides, score trade-offs, and synthesize workshop feedback with the PPSS playbook.'
-+      },
-+      'design-plan-evaluation-2': {
-+        title: 'Report Architect',
-+        helper: 'Compose executive-ready summaries, quantify evidence, and prepare narratives for governance reviews.'
-+      }
-+    };
-+
-+    function initializeWorkspaceState() {
-+      if (typeof localStorage === 'undefined') {
-+        return;
-+      }
-+
-+      try {
-+        const storedConversations = JSON.parse(localStorage.getItem(conversationStorageKey));
-+        if (storedConversations && typeof storedConversations === 'object') {
-+          Object.keys(conversations).forEach((stageId) => {
-+            if (Array.isArray(storedConversations[stageId])) {
-+              conversations[stageId] = storedConversations[stageId];
-+            }
-+          });
-+        }
-+      } catch (error) {
-+        console.error('Unable to load saved workspace conversations.', error);
-+      }
-+
-+      try {
-+        const storedSummaries = JSON.parse(localStorage.getItem(summaryStorageKey));
-+        if (storedSummaries && typeof storedSummaries === 'object') {
-+          Object.entries(storedSummaries).forEach(([stageId, summary]) => {
-+            if (typeof summary === 'string') {
-+              stageSummaries[stageId] = summary;
-+            }
-+          });
-+        }
-+      } catch (error) {
-+        console.error('Unable to load saved workspace summaries.', error);
-+      }
-+    }
-+
-+    function persistConversations() {
-+      if (typeof localStorage === 'undefined') {
-+        return;
-+      }
-+
-+      try {
-+        localStorage.setItem(conversationStorageKey, JSON.stringify(conversations));
-+      } catch (error) {
-+        console.error('Unable to save workspace conversations.', error);
-+      }
-+    }
-+
-+    function persistSummaries() {
-+      if (typeof localStorage === 'undefined') {
-+        return;
-+      }
-+
-+      const entries = Object.entries(stageSummaries).filter(([, value]) => typeof value === 'string' && value.trim().length > 0);
-+      try {
-+        if (entries.length === 0) {
-+          localStorage.removeItem(summaryStorageKey);
-+        } else {
-+          const payload = Object.fromEntries(entries);
-+          localStorage.setItem(summaryStorageKey, JSON.stringify(payload));
-+        }
-+      } catch (error) {
-+        console.error('Unable to save workspace summaries.', error);
-+      }
-+    }
-+
-+    function dispatchSummaryUpdate(stageId) {
-+      if (typeof window === 'undefined') {
-+        return;
-+      }
-+
-+      window.dispatchEvent(
-+        new CustomEvent('ppss-summary-updated', {
-+          detail: {
-+            stageId,
-+            summary: stageSummaries[stageId] || ''
-+          }
-+        })
-+      );
-+    }
-+
-+    async function updateStageSummary(stageId, options = {}) {
-+      const { silent = false } = options;
-+
-+      if (!conversations[stageId] || conversations[stageId].length === 0) {
-+        delete stageSummaries[stageId];
-+        persistSummaries();
-+        dispatchSummaryUpdate(stageId);
-+        if (!silent && chatStatus) {
-+          chatStatus.textContent = 'Summary cleared for this stage.';
-+        }
-+        return;
-+      }
-+
-+      const transcriptMessages = conversations[stageId].slice(-10);
-+      const transcript = transcriptMessages
-+        .map((message) => `${message.role === 'user' ? 'User' : 'ChatGPT'}: ${message.content}`)
-+        .join('\n');
-+      const stageLabel = stageLabels[stageId] || stageId;
-+
-+      if (!silent && chatStatus) {
-+        chatStatus.textContent = 'Summarizing conversation for the report…';
-+      }
-+
-+      try {
-+        const response = await fetch(CHAT_API_URL, {
-+          method: 'POST',
-+          headers: {
-+            'Content-Type': 'application/json',
-+            Authorization: `Bearer ${API_KEY}`
-+          },
-+          body: JSON.stringify({
-+            model: CHAT_MODEL,
-+            temperature: 0.2,
-+            messages: [
-+              {
-+                role: 'system',
-+                content:
-+                  'You summarize PPSS workspace conversations. Provide a concise, executive-ready summary (2-3 sentences) capturing key decisions, insights, and follow-ups. Focus on actionable highlights.'
-+              },
-+              {
-+                role: 'user',
-+                content: `Stage: ${stageLabel}\nConversation transcript:\n${transcript}\nSummary:`
-+              }
-+            ],
-+            max_tokens: 220
-+          })
-+        });
-+
-+        if (!response.ok) {
-+          throw new Error(`Summary request failed with status ${response.status}`);
-+        }
-+
-+        const data = await response.json();
-+        const summary = data?.choices?.[0]?.message?.content?.trim();
-+
-+        if (summary) {
-+          stageSummaries[stageId] = summary;
-+        } else {
-+          const fallback = transcriptMessages.filter((entry) => entry.role === 'assistant').pop()?.content || '';
-+          if (fallback) {
-+            stageSummaries[stageId] = fallback;
-+          } else {
-+            delete stageSummaries[stageId];
-+          }
-+        }
-+
-+        persistSummaries();
-+        dispatchSummaryUpdate(stageId);
-+
-+        if (!silent && chatStatus) {
-+          chatStatus.textContent = 'Stage summary updated for the report dashboard.';
-+        }
-+      } catch (error) {
-+        const fallback = transcriptMessages.filter((entry) => entry.role === 'assistant').pop()?.content || '';
-+        if (fallback) {
-+          stageSummaries[stageId] = fallback;
-+        }
-+        persistSummaries();
-+        dispatchSummaryUpdate(stageId);
-+
-+        if (!silent && chatStatus) {
-+          chatStatus.textContent = 'Could not refresh the report summary. Showing the latest assistant response instead.';
-+        }
-+
-+        console.error('Unable to generate stage summary.', error);
-+      }
-+    }
-+
-+    function updateChatStageCopy(stageId) {
-+      const copy = chatStageCopy[stageId];
-+      if (!copy) {
-+        return;
-+      }
-+
-+      chatPanelTitle.textContent = copy.title;
-+      chatPanelHelper.textContent = copy.helper;
-+
-+      const indicatorLabel = Array.from(stepButtons).find((button) => button.dataset.stage === stageId)?.querySelector('.stepper__label')?.textContent;
-+      chatStageIndicator.textContent = indicatorLabel || 'Workspace';
-+
-+      chatStageAnalytics.hidden = stageId !== 'design-plan-evaluation-2';
-+    }
-+
-+    function setActiveStage(stageId) {
-+      if (activeStage === stageId) {
-+        return;
-+      }
-+
-+      activeStage = stageId;
-+
-+      stepButtons.forEach((button) => {
-+        const isActive = button.dataset.stage === stageId;
-+        button.classList.toggle('stepper__item--active', isActive);
-+        button.setAttribute('aria-selected', isActive ? 'true' : 'false');
-+      });
-+
-+      stages.forEach((stage) => {
-+        const isActive = stage.dataset.stage === stageId;
-+        stage.classList.toggle('workspace-stage--active', isActive);
-+        stage.toggleAttribute('hidden', !isActive);
-+      });
-+
-+      updateChatStageCopy(stageId);
-+      renderConversation();
-+      updateStepperProgress(stageId);
-+    }
-+
-+    function renderConversation() {
-+      const messages = conversations[activeStage] || [];
-+      chatLog.innerHTML = '';
-+
-+      if (messages.length === 0) {
-+        const emptyState = document.createElement('div');
-+        emptyState.className = 'chat-log__empty';
-+        emptyState.textContent = 'Start a conversation with ChatGPT to receive co-design support for this stage.';
-+        chatLog.appendChild(emptyState);
-+        return;
-+      }
-+
-+      messages.forEach((message) => {
-+        const messageElement = document.createElement('div');
-+        messageElement.className = `chat-message chat-message--${message.role}`;
-+
-+        const roleElement = document.createElement('span');
-+        roleElement.className = 'chat-message__role';
-+        roleElement.textContent = message.role === 'user' ? 'You' : 'ChatGPT';
-+        messageElement.appendChild(roleElement);
-+
-+        const contentElement = document.createElement('p');
-+        contentElement.className = 'chat-message__content';
-+        contentElement.textContent = message.content;
-+        messageElement.appendChild(contentElement);
-+
-+        chatLog.appendChild(messageElement);
-+      });
-+
-+      chatLog.scrollTop = chatLog.scrollHeight;
-+    }
-+
-+    async function sendMessage(event) {
-+      event.preventDefault();
-+      const message = chatTextarea.value.trim();
-+      if (!message) return;
-+
-+      const messages = conversations[activeStage];
-+      messages.push({ role: 'user', content: message });
-+      persistConversations();
-+      renderConversation();
-+      chatTextarea.value = '';
-+      chatTextarea.focus();
-+
-+      chatStatus.textContent = 'Requesting response from ChatGPT…';
-+      chatForm.classList.add('chat-form--loading');
-+
-+      try {
-+        const response = await fetch(CHAT_API_URL, {
-+          method: 'POST',
-+          headers: {
-+            'Content-Type': 'application/json',
-+            'Authorization': `Bearer ${API_KEY}`
-+          },
-+          body: JSON.stringify({
-+            model: CHAT_MODEL,
-+            messages: [
-+              {
-+                role: 'system',
-+                content: 'You are the PPSS policy design assistant. Respond with concise, actionable insights tailored to the current workflow stage. Reference public sector best practices and co-design methods.'
-+              },
-+              ...messages
-+            ]
-+          })
-+        });
-+
-+        if (!response.ok) {
-+          throw new Error(`Request failed with status ${response.status}`);
-+        }
-+
-+        const data = await response.json();
-+        const aiMessage = data?.choices?.[0]?.message?.content?.trim();
-+
-+        if (!aiMessage) {
-+          throw new Error('No response returned from ChatGPT.');
-+        }
-+
-+        messages.push({ role: 'assistant', content: aiMessage });
-+        persistConversations();
-+        renderConversation();
-+        chatStatus.textContent = 'ChatGPT responded successfully. Updating the report summary…';
-+        await updateStageSummary(activeStage);
-+      } catch (error) {
-+        messages.push({ role: 'assistant', content: `There was an error generating a response: ${error.message}` });
-+        persistConversations();
-+        renderConversation();
-+        chatStatus.textContent = 'Unable to retrieve a response. Please try again.';
-+      } finally {
-+        chatForm.classList.remove('chat-form--loading');
-+      }
-+    }
-+
-+    function updateStepperProgress(stageId) {
-+      if (!stepperProgressBar) {
-+        return;
-+      }
-+
-+      const stageButtons = Array.from(stepButtons);
-+      const activeIndex = stageButtons.findIndex((button) => button.dataset.stage === stageId);
-+
-+      if (activeIndex === -1) {
-+        return;
-+      }
-+
-+      const completion = ((activeIndex + 1) / stageButtons.length) * 100;
-+      stepperProgressBar.style.width = `${completion}%`;
-+    }
-+
-+    stepButtons.forEach((button) => {
-+      button.addEventListener('click', () => setActiveStage(button.dataset.stage));
-+      button.addEventListener('keydown', (event) => {
-+        if (event.key === 'Enter' || event.key === ' ') {
-+          event.preventDefault();
-+          setActiveStage(button.dataset.stage);
-+        }
-+      });
-+    });
-+
-+    analysisTabButtons.forEach((button) => {
-+      button.addEventListener('click', () => {
-+        const target = button.dataset.analysisTab;
-+        analysisTabButtons.forEach((tabButton) => {
-+          const isActive = tabButton === button;
-+          tabButton.classList.toggle('analysis-tabs__button--active', isActive);
-+          tabButton.setAttribute('aria-selected', isActive ? 'true' : 'false');
-+        });
-+        analysisPanels.forEach((panel) => {
-+          const isActive = panel.dataset.analysisPanel === target;
-+          panel.classList.toggle('analysis-panel--active', isActive);
-+          panel.toggleAttribute('hidden', !isActive);
-+        });
-+      });
-+    });
-+
-+    if (conceptForm) {
-+      const sampleImages = [
-+        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 160'%3E%3Cdefs%3E%3ClinearGradient id='i' x1='0'%25 y1='0'%25 x2='100'%25 y2='100'%25%3E%3Cstop offset='0'%25 stop-color='%23ffefd5'/%3E%3Cstop offset='100'%25 stop-color='%23ffb347'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='220' height='160' rx='18' fill='url(%23i)'/%3E%3Cpath fill='%23fff' opacity='.75' d='M44 108h132v16H44zM60 48h100l-22 40H38z'/%3E%3C/svg%3E",
-+        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 160'%3E%3Cdefs%3E%3ClinearGradient id='j' x1='0'%25 y1='100'%25 x2='100'%25 y2='0'%25%3E%3Cstop offset='0'%25 stop-color='%23d7f8ff'/%3E%3Cstop offset='100'%25 stop-color='%2381d4fa'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='220' height='160' rx='18' fill='url(%23j)'/%3E%3Cpath fill='%23fff' opacity='.8' d='M44 56h132v28H44zM44 96h96v16H44zM44 120h72v12H44z'/%3E%3C/svg%3E",
-+        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 160'%3E%3Cdefs%3E%3ClinearGradient id='k' x1='0'%25 y1='0'%25 x2='100'%25 y2='100'%25%3E%3Cstop offset='0'%25 stop-color='%23f6f0ff'/%3E%3Cstop offset='100'%25 stop-color='%23cbb6ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='220' height='160' rx='18' fill='url(%23k)'/%3E%3Cpath fill='%23fff' opacity='.78' d='M44 88h132v12H44zM64 52h92l-28 48H36z'/%3E%3C/svg%3E"
-+      ];
-+
-+      conceptForm.addEventListener('submit', async (event) => {
-+        event.preventDefault();
-+        const formData = new FormData(conceptForm);
-+        const prompt = formData.get('concept-prompt');
-+        if (!prompt) return;
-+
-+        conceptStatus.textContent = 'Requesting concept art from ChatGPT…';
-+        conceptGallery.innerHTML = '';
-+        conceptGallery.classList.add('concept-gallery--loading');
-+
-+        try {
-+          const response = await fetch(IMAGE_API_URL, {
-+            method: 'POST',
-+            headers: {
-+              'Content-Type': 'application/json',
-+              Authorization: `Bearer ${API_KEY}`
-+            },
-+            body: JSON.stringify({
-+              model: IMAGE_MODEL,
-+              prompt,
-+              size: '1024x1024',
-+              n: 4
-+            })
-+          });
-+
-+          if (!response.ok) {
-+            throw new Error(`ChatGPT image request failed (${response.status})`);
-+          }
-+
-+          const data = await response.json();
-+          const images = Array.isArray(data?.data)
-+            ? data.data
-+                .map((entry) => {
-+                  if (entry.url) return entry.url;
-+                  if (entry.b64_json) return `data:image/png;base64,${entry.b64_json}`;
-+                  return '';
-+                })
-+                .filter((url) => typeof url === 'string' && url.length > 0)
-+            : [];
-+
-+          if (images.length) {
-+            renderConceptImages(images);
-+            conceptStatus.textContent = 'ChatGPT returned fresh concepts.';
-+            return;
-+          }
-+
-+          renderConceptImages(sampleImages);
-+          conceptStatus.textContent = 'Showing sample concepts while waiting for ChatGPT output.';
-+        } catch (error) {
-+          renderConceptImages(sampleImages);
-+          conceptStatus.textContent = `Using example concepts because the ChatGPT image API was unavailable (${error.message}).`;
-+        } finally {
-+          conceptGallery.classList.remove('concept-gallery--loading');
-+        }
-+      });
-+    }
-+
-+    function renderConceptImages(images) {
-+      if (!conceptGallery) return;
-+      conceptGallery.innerHTML = '';
-+      images.slice(0, 4).forEach((url, index) => {
-+        const figure = document.createElement('figure');
-+        figure.className = 'concept-card';
-+        const img = document.createElement('img');
-+        img.className = 'concept-card__image';
-+        img.src = typeof url === 'string' ? url : url?.url || '';
-+        img.alt = 'Generated PPSS concept visual';
-+        figure.appendChild(img);
-+        const caption = document.createElement('figcaption');
-+        caption.className = 'concept-card__caption';
-+        caption.textContent = index === 0 ? 'Resident onboarding hub' : index === 1 ? 'Mobile-first PPSS assistant' : index === 2 ? 'Community partnership studio' : 'Policy analytics cockpit';
-+        figure.appendChild(caption);
-+        conceptGallery.appendChild(figure);
-+      });
-+    }
-+
-+    chatForm.addEventListener('submit', sendMessage);
-+
-+    initializeWorkspaceState();
-+    updateChatStageCopy(activeStage);
-+    renderConversation();
-+    updateStepperProgress(activeStage);
-+  </script>
-+</body>
-+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PPSS Workspace</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <aside class="sidebar" aria-label="Primary navigation">
+    <div class="sidebar__logo">PPSS</div>
+    <nav class="nav">
+      <a class="nav__link" href="home.html">
+        <span class="nav__icon" aria-hidden="true">🏠</span>
+        <span>Home</span>
+      </a>
+      <a class="nav__link nav__link--active" href="workspace.html" aria-current="page">
+        <span class="nav__icon" aria-hidden="true">🧩</span>
+        <span>Workspace</span>
+      </a>
+      <a class="nav__link" href="report.html">
+        <span class="nav__icon" aria-hidden="true">📊</span>
+        <span>Report</span>
+      </a>
+      <a class="nav__link" href="index.html">
+        <span class="nav__icon" aria-hidden="true">🧭</span>
+        <span>Index</span>
+      </a>
+      <a class="nav__link" href="settings.html">
+        <span class="nav__icon" aria-hidden="true">⚙️</span>
+        <span>Settings</span>
+      </a>
+    </nav>
+  </aside>
+
+  <main class="main">
+    <header class="main__header">
+      <h1 class="main__title">Design Collaboration Workspace</h1>
+      <p class="main__subtitle">Navigate the PPSS workflow, track which phase you are working on, and co-create policy responses with ChatGPT.</p>
+    </header>
+
+    <div class="stepper" role="tablist" aria-label="Workspace stages">
+      <button class="stepper__item stepper__item--active" type="button" role="tab" aria-selected="true" data-stage="problem-definition">
+        <span class="stepper__icon" aria-hidden="true">🎯</span>
+        <span class="stepper__badge" aria-hidden="true">1</span>
+        <span class="stepper__label">Problem Definition</span>
+      </button>
+      <button class="stepper__item" type="button" role="tab" aria-selected="false" data-stage="data-analysis">
+        <span class="stepper__icon" aria-hidden="true">📊</span>
+        <span class="stepper__badge" aria-hidden="true">2</span>
+        <span class="stepper__label">Data Analysis</span>
+      </button>
+      <button class="stepper__item" type="button" role="tab" aria-selected="false" data-stage="design-plan-alternatives">
+        <span class="stepper__icon" aria-hidden="true">🎨</span>
+        <span class="stepper__badge" aria-hidden="true">3</span>
+        <span class="stepper__label">Design/Plan Alternatives</span>
+      </button>
+      <button class="stepper__item" type="button" role="tab" aria-selected="false" data-stage="design-plan-evaluation-1">
+        <span class="stepper__icon" aria-hidden="true">🧪</span>
+        <span class="stepper__badge" aria-hidden="true">4</span>
+        <span class="stepper__label">Design/Plan Evaluation</span>
+      </button>
+      <button class="stepper__item" type="button" role="tab" aria-selected="false" data-stage="design-plan-evaluation-2">
+        <span class="stepper__icon" aria-hidden="true">📈</span>
+        <span class="stepper__badge" aria-hidden="true">5</span>
+        <span class="stepper__label">Design/Plan Evaluation</span>
+      </button>
+    </div>
+    <div class="stepper-progress" aria-hidden="true">
+      <div class="stepper-progress__bar" style="width: 20%"></div>
+    </div>
+
+    <div class="workspace-layout">
+      <section class="workspace-panel workspace-panel--input" aria-live="polite">
+        <article class="workspace-stage workspace-stage--active" data-stage="problem-definition">
+          <div class="stage-hero">
+            <img class="stage-hero__image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 220'%3E%3Cdefs%3E%3ClinearGradient id='a' x1='0'%25 y1='0'%25 x2='100'%25 y2='100'%25%3E%3Cstop offset='0'%25 stop-color='%23e0f2ff'/%3E%3Cstop offset='100'%25 stop-color='%2397b5ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23a)' width='320' height='220' rx='18'/%3E%3Cpath fill='%23fff' opacity='.6' d='M48 60h224v18H48zm0 42h176v18H48zm0 42h128v18H48z'/%3E%3C/svg%3E" alt="Illustration representing policy problem framing">
+            <div class="stage-hero__body">
+              <h2 class="workspace-panel__title">Problem Definition</h2>
+              <p class="stage-hero__lead">Frame the policy design challenge with aligned intent, shared evidence, and human stories from the PPSS ecosystem.</p>
+              <ul class="stage-hero__list">
+                <li>Summarize the community pain points and urgency for intervention.</li>
+                <li>Document stakeholder mandates and the desired system-level outcomes.</li>
+                <li>Capture current policies, gaps, and success measures to explore with ChatGPT.</li>
+              </ul>
+            </div>
+          </div>
+          <section class="stage-notes" aria-label="Problem framing notes">
+            <h3 class="stage-notes__title">Insight Notebook</h3>
+            <textarea class="stage-notes__textarea" id="problem-insights" name="problem-insights" rows="6" placeholder="Record narrative insights, field observations, and quotes that should inform the design brief."></textarea>
+          </section>
+        </article>
+
+        <article class="workspace-stage" data-stage="data-analysis" hidden>
+          <h2 class="workspace-panel__title">Data Analysis</h2>
+          <p class="workspace-panel__intro">Switch between the analytic perspectives that guide how PPSS intelligence is interpreted for the case study.</p>
+          <div class="analysis-tabs" role="tablist" aria-label="Data analysis perspectives">
+            <button class="analysis-tabs__button analysis-tabs__button--active" type="button" role="tab" aria-selected="true" data-analysis-tab="sources">Evidence Sources</button>
+            <button class="analysis-tabs__button" type="button" role="tab" aria-selected="false" data-analysis-tab="signals">Emerging Signals</button>
+            <button class="analysis-tabs__button" type="button" role="tab" aria-selected="false" data-analysis-tab="dashboards">Dashboards</button>
+          </div>
+          <div class="analysis-panels">
+            <article class="analysis-panel analysis-panel--active" data-analysis-panel="sources">
+              <img class="analysis-panel__image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 200'%3E%3Cdefs%3E%3ClinearGradient id='b' x1='0'%25 y1='0'%25 x2='100'%25 y2='0'%25%3E%3Cstop offset='0'%25 stop-color='%23d4f4f6'/%3E%3Cstop offset='100'%25 stop-color='%2382d6ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='320' height='200' rx='16' fill='url(%23b)'/%3E%3Ccircle cx='84' cy='96' r='48' fill='%23fff' opacity='.6'/%3E%3Crect x='152' y='60' width='120' height='28' rx='12' fill='%23fff' opacity='.8'/%3E%3Crect x='152' y='108' width='96' height='24' rx='10' fill='%23fff' opacity='.8'/%3E%3Crect x='152' y='148' width='72' height='20' rx='8' fill='%23fff' opacity='.8'/%3E%3C/svg%3E" alt="Illustration showing layered datasets">
+              <div class="analysis-panel__body">
+                <h3 class="analysis-panel__title">Evidence Sources</h3>
+                <p>Combine PPSS operational data, socio-economic indicators, and resident feedback to build a comprehensive picture of the challenge environment.</p>
+                <ul class="analysis-panel__list">
+                  <li>Import structured datasets directly from the PPSS warehouse.</li>
+                  <li>Tag qualitative transcripts with policy-relevant sentiments.</li>
+                  <li>Summarize baseline metrics for fast comparison later.</li>
+                </ul>
+              </div>
+            </article>
+            <article class="analysis-panel" data-analysis-panel="signals" hidden>
+              <img class="analysis-panel__image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 200'%3E%3Cdefs%3E%3ClinearGradient id='c' x1='0'%25 y1='100'%25 x2='100'%25 y2='0'%25%3E%3Cstop offset='0'%25 stop-color='%23ffe3ee'/%3E%3Cstop offset='100'%25 stop-color='%23ff9ad5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='320' height='200' rx='16' fill='url(%23c)'/%3E%3Cpolyline fill='none' stroke='%23fff' stroke-width='6' stroke-linecap='round' stroke-linejoin='round' points='40,150 96,92 164,132 228,64 280,118' opacity='.8'/%3E%3Ccircle cx='96' cy='92' r='10' fill='%23fff'/%3E%3Ccircle cx='164' cy='132' r='10' fill='%23fff'/%3E%3Ccircle cx='228' cy='64' r='10' fill='%23fff'/%3E%3C/svg%3E" alt="Line graph illustrating emerging signals">
+              <div class="analysis-panel__body">
+                <h3 class="analysis-panel__title">Emerging Signals</h3>
+                <p>Track anomalies and trend breaks to see where interventions should be prioritized and which communities require rapid support.</p>
+                <ul class="analysis-panel__list">
+                  <li>Surface outliers from weekly PPSS sentiment monitoring.</li>
+                  <li>Identify neighborhoods with compounding risks.</li>
+                  <li>Flag policies that trigger unintended consequences.</li>
+                </ul>
+              </div>
+            </article>
+            <article class="analysis-panel" data-analysis-panel="dashboards" hidden>
+              <img class="analysis-panel__image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 200'%3E%3Cdefs%3E%3ClinearGradient id='d' x1='0'%25 y1='0'%25 x2='100'%25 y2='100'%25%3E%3Cstop offset='0'%25 stop-color='%23f4f1ff'/%3E%3Cstop offset='100'%25 stop-color='%23c9b5ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='320' height='200' rx='16' fill='url(%23d)'/%3E%3Crect x='48' y='52' width='96' height='96' rx='12' fill='%23fff' opacity='.85'/%3E%3Crect x='168' y='52' width='112' height='28' rx='12' fill='%23fff' opacity='.85'/%3E%3Crect x='168' y='92' width='112' height='56' rx='12' fill='%23fff' opacity='.85'/%3E%3C/svg%3E" alt="Dashboard cards illustration">
+              <div class="analysis-panel__body">
+                <h3 class="analysis-panel__title">Dashboards</h3>
+                <p>Align the team around shared metrics with dashboards that update in real time and translate AI findings into policy-ready evidence.</p>
+                <ul class="analysis-panel__list">
+                  <li>Review service accessibility, equity, and fiscal indicators.</li>
+                  <li>Export snapshots for inclusion in PPSS executive reports.</li>
+                  <li>Set automated alerts for threshold breaches.</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </article>
+
+        <article class="workspace-stage" data-stage="design-plan-alternatives" hidden>
+          <h2 class="workspace-panel__title">Design/Plan Alternatives</h2>
+          <p class="workspace-panel__intro">Co-create visual concepts that communicate how the proposed PPSS interventions could look and feel for residents.</p>
+          <form class="concept-form" id="concept-form" aria-label="ChatGPT image generation form">
+            <label class="concept-form__label" for="concept-prompt">Prompt</label>
+            <textarea class="concept-form__textarea" id="concept-prompt" name="concept-prompt" rows="3" placeholder="Describe the service environment, target persona, and emotion to capture." required></textarea>
+            <p class="concept-form__hint">ChatGPT will generate four concept images using the Images API and the prompt above.</p>
+            <div class="concept-form__actions">
+              <button class="concept-form__submit" type="submit">Generate Concepts</button>
+              <span class="concept-form__status" id="concept-status" role="status" aria-live="polite"></span>
+            </div>
+          </form>
+          <div class="concept-gallery" id="concept-gallery" aria-live="polite" aria-label="Generated concept gallery">
+            <p class="concept-gallery__placeholder">Use the ChatGPT image generation integration to visualize alternatives for the PPSS experience.</p>
+          </div>
+        </article>
+
+        <article class="workspace-stage" data-stage="design-plan-evaluation-1" hidden>
+          <h2 class="workspace-panel__title">Design/Plan Evaluation</h2>
+          <p class="workspace-panel__intro">Assess the experiential quality of each alternative using curated reference photos and community review cues.</p>
+          <div class="evaluation-gallery" role="list">
+            <figure class="evaluation-card" role="listitem">
+              <img class="evaluation-card__image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 160'%3E%3Cdefs%3E%3ClinearGradient id='e' x1='0'%25 y1='0'%25 x2='100'%25 y2='100'%25%3E%3Cstop offset='0'%25 stop-color='%23ffe8cc'/%3E%3Cstop offset='100'%25 stop-color='%23ffb347'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='200' height='160' rx='16' fill='url(%23e)'/%3E%3Cpath fill='%23fff' opacity='.75' d='M40 112h120v16H40zM56 56h88l-24 40H32z'/%3E%3C/svg%3E" alt="Service counter prototype">
+              <figcaption class="evaluation-card__caption">Prototype service counter demonstrating multilingual triage.</figcaption>
+            </figure>
+            <figure class="evaluation-card" role="listitem">
+              <img class="evaluation-card__image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 160'%3E%3Cdefs%3E%3ClinearGradient id='f' x1='0'%25 y1='100'%25 x2='100'%25 y2='0'%25%3E%3Cstop offset='0'%25 stop-color='%23d6f8ff'/%3E%3Cstop offset='100'%25 stop-color='%2364c5ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='200' height='160' rx='16' fill='url(%23f)'/%3E%3Cpath fill='%23fff' opacity='.75' d='M40 64h120v24H40zM40 100h120v16H40zM40 124h72v12H40z'/%3E%3C/svg%3E" alt="Digital service mock-up">
+              <figcaption class="evaluation-card__caption">Digital intake journey showing accessible PPSS language options.</figcaption>
+            </figure>
+            <figure class="evaluation-card" role="listitem">
+              <img class="evaluation-card__image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 160'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0'%25 y1='0'%25 x2='100'%25 y2='0'%25%3E%3Cstop offset='0'%25 stop-color='%23f5e9ff'/%3E%3Cstop offset='100'%25 stop-color='%23c39bff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='200' height='160' rx='16' fill='url(%23g)'/%3E%3Cpath fill='%23fff' opacity='.75' d='M40 56h120l-40 64H40zM72 120h64v16H72z'/%3E%3C/svg%3E" alt="Community workshop illustration">
+              <figcaption class="evaluation-card__caption">Community workshop setup emphasizing inclusive facilitation.</figcaption>
+            </figure>
+          </div>
+          <section class="stage-notes" aria-label="Evaluation notes">
+            <h3 class="stage-notes__title">Resident Review Notes</h3>
+            <textarea class="stage-notes__textarea" id="evaluation-notes" name="evaluation-notes" rows="5" placeholder="Capture feedback themes, emotional reactions, and priority refinements."></textarea>
+          </section>
+        </article>
+
+        <article class="workspace-stage" data-stage="design-plan-evaluation-2" hidden>
+          <h2 class="workspace-panel__title">Design/Plan Evaluation</h2>
+          <p class="workspace-panel__intro">Translate the validated concept into a policy-ready report with executive signals and operational commitments.</p>
+          <section class="report-board" aria-label="Report outline">
+            <header class="report-board__header">
+              <h3 class="report-board__title">PPSS Policy Impact Report</h3>
+              <p class="report-board__meta">Draft v1.2 • Prepared for Interagency Steering Committee</p>
+            </header>
+            <div class="report-board__section">
+              <h4 class="report-board__section-title">Executive Summary</h4>
+              <p>The pilot demonstrates a 24% increase in timely benefits resolution with enhanced equity for linguistically diverse households.</p>
+            </div>
+            <div class="report-board__section">
+              <h4 class="report-board__section-title">Operational Commitments</h4>
+              <ul>
+                <li>Deploy PPSS onboarding coaches across five priority districts.</li>
+                <li>Launch a multilingual notification stream integrated with civic portals.</li>
+                <li>Institute monthly impact reviews co-led by resident advisors.</li>
+              </ul>
+            </div>
+            <div class="report-board__section">
+              <h4 class="report-board__section-title">Risk Outlook</h4>
+              <p>Requires an ethics review for AI recommendations and expanded data-sharing agreements to maintain compliance.</p>
+            </div>
+          </section>
+        </article>
+      </section>
+
+      <section class="workspace-panel workspace-panel--chat" aria-label="Stage companion panel">
+        <header class="chat-header">
+          <div>
+            <h2 class="workspace-panel__title" id="chat-panel-title">ChatGPT Co-Designer</h2>
+            <p class="workspace-panel__helper" id="chat-panel-helper">Summon design prompts, critique drafts, and convert insights into policy-ready narratives. Conversations are stored per stage.</p>
+          </div>
+          <span class="chat-header__stage" id="chat-stage-indicator">Problem Definition</span>
+        </header>
+
+        <div class="chat-stage-analytics" id="chat-stage-analytics" hidden>
+          <div class="analytics-board">
+            <h3 class="analytics-board__title">Impact Evidence</h3>
+            <div class="analytics-board__grid">
+              <figure class="analytics-card">
+                <img class="analytics-card__image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 120'%3E%3Cdefs%3E%3ClinearGradient id='h' x1='0'%25 y1='0'%25 x2='100'%25 y2='100'%25%3E%3Cstop offset='0'%25 stop-color='%23dff6ff'/%3E%3Cstop offset='100'%25 stop-color='%2380d6ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='180' height='120' rx='14' fill='url(%23h)'/%3E%3Cpath fill='%23fff' opacity='.8' d='M36 84h108v12H36zM50 36h80l-20 36H30z'/%3E%3C/svg%3E" alt="Report visualization">
+                <figcaption class="analytics-card__caption">Field deployment photo set capturing resident navigation support.</figcaption>
+              </figure>
+              <div class="analytics-metrics">
+                <div class="analytics-metric">
+                  <span class="analytics-metric__label">Service Resolution</span>
+                  <span class="analytics-metric__value">+24%</span>
+                </div>
+                <div class="analytics-metric">
+                  <span class="analytics-metric__label">Equity Score</span>
+                  <span class="analytics-metric__value">0.86</span>
+                </div>
+                <div class="analytics-metric">
+                  <span class="analytics-metric__label">Budget Variance</span>
+                  <span class="analytics-metric__value">-3.2%</span>
+                </div>
+                <div class="analytics-metric">
+                  <span class="analytics-metric__label">Resident Satisfaction</span>
+                  <span class="analytics-metric__value">4.6 / 5</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chat-log" id="chat-log" aria-live="polite"></div>
+
+        <form class="chat-form" id="chat-form">
+          <label class="chat-form__label" for="chat-message">Message</label>
+          <textarea class="chat-form__textarea" id="chat-message" name="chat-message" rows="3" placeholder="Ask for research synthesis, draft an executive summary, or brainstorm co-design activities." required></textarea>
+          <div class="chat-form__actions">
+            <button class="chat-form__submit" type="submit">Send to ChatGPT</button>
+          </div>
+        </form>
+        <div class="chat-status" id="chat-status" role="status" aria-live="polite"></div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const stepButtons = document.querySelectorAll('.stepper__item');
+    const stages = document.querySelectorAll('.workspace-stage');
+    const chatLog = document.getElementById('chat-log');
+    const chatForm = document.getElementById('chat-form');
+    const chatTextarea = document.getElementById('chat-message');
+    const chatStatus = document.getElementById('chat-status');
+    const chatStageIndicator = document.getElementById('chat-stage-indicator');
+    const chatPanelTitle = document.getElementById('chat-panel-title');
+    const chatPanelHelper = document.getElementById('chat-panel-helper');
+    const chatStageAnalytics = document.getElementById('chat-stage-analytics');
+    const stepperProgressBar = document.querySelector('.stepper-progress__bar');
+
+    const analysisTabButtons = document.querySelectorAll('[data-analysis-tab]');
+    const analysisPanels = document.querySelectorAll('[data-analysis-panel]');
+    const conceptForm = document.getElementById('concept-form');
+    const conceptStatus = document.getElementById('concept-status');
+    const conceptGallery = document.getElementById('concept-gallery');
+
+    const API_KEY = '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';
+    const CHAT_API_URL = 'https://api.openai.com/v1/chat/completions';
+    const IMAGE_API_URL = 'https://api.openai.com/v1/images/generations';
+    const CHAT_MODEL = 'gpt-4o-mini';
+    const IMAGE_MODEL = 'gpt-image-1';
+    const conversationStorageKey = 'ppssWorkspaceConversations';
+    const summaryStorageKey = 'ppssWorkspaceSummaries';
+    const stageLabels = {
+      'problem-definition': 'Problem Definition',
+      'data-analysis': 'Data Analysis',
+      'design-plan-alternatives': 'Design/Plan Alternatives',
+      'design-plan-evaluation-1': 'Design/Plan Evaluation',
+      'design-plan-evaluation-2': 'Design/Plan Evaluation (Reporting)'
+    };
+
+    let activeStage = 'problem-definition';
+    const conversations = {
+      'problem-definition': [],
+      'data-analysis': [],
+      'design-plan-alternatives': [],
+      'design-plan-evaluation-1': [],
+      'design-plan-evaluation-2': []
+    };
+    const stageSummaries = {};
+
+    const chatStageCopy = {
+      'problem-definition': {
+        title: 'ChatGPT Co-Designer',
+        helper: 'Summon design prompts, critique drafts, and convert insights into policy-ready narratives. Conversations are stored per stage.'
+      },
+      'data-analysis': {
+        title: 'Analytical Copilot',
+        helper: 'Translate datasets into insight-ready talking points and request scripts for PPSS dashboards or QA checks.'
+      },
+      'design-plan-alternatives': {
+        title: 'Concept Companion',
+        helper: 'Craft visual prompts, orchestrate ChatGPT image generation, and outline resident journeys for each alternative.'
+      },
+      'design-plan-evaluation-1': {
+        title: 'Evaluation Facilitator',
+        helper: 'Frame discussion guides, score trade-offs, and synthesize workshop feedback with the PPSS playbook.'
+      },
+      'design-plan-evaluation-2': {
+        title: 'Report Architect',
+        helper: 'Compose executive-ready summaries, quantify evidence, and prepare narratives for governance reviews.'
+      }
+    };
+
+    function initializeWorkspaceState() {
+      if (typeof localStorage === 'undefined') {
+        return;
+      }
+
+      try {
+        const storedConversations = JSON.parse(localStorage.getItem(conversationStorageKey));
+        if (storedConversations && typeof storedConversations === 'object') {
+          Object.keys(conversations).forEach((stageId) => {
+            if (Array.isArray(storedConversations[stageId])) {
+              conversations[stageId] = storedConversations[stageId];
+            }
+          });
+        }
+      } catch (error) {
+        console.error('Unable to load saved workspace conversations.', error);
+      }
+
+      try {
+        const storedSummaries = JSON.parse(localStorage.getItem(summaryStorageKey));
+        if (storedSummaries && typeof storedSummaries === 'object') {
+          Object.entries(storedSummaries).forEach(([stageId, summary]) => {
+            if (typeof summary === 'string') {
+              stageSummaries[stageId] = summary;
+            }
+          });
+        }
+      } catch (error) {
+        console.error('Unable to load saved workspace summaries.', error);
+      }
+    }
+
+    function persistConversations() {
+      if (typeof localStorage === 'undefined') {
+        return;
+      }
+
+      try {
+        localStorage.setItem(conversationStorageKey, JSON.stringify(conversations));
+      } catch (error) {
+        console.error('Unable to save workspace conversations.', error);
+      }
+    }
+
+    function persistSummaries() {
+      if (typeof localStorage === 'undefined') {
+        return;
+      }
+
+      const entries = Object.entries(stageSummaries).filter(([, value]) => typeof value === 'string' && value.trim().length > 0);
+      try {
+        if (entries.length === 0) {
+          localStorage.removeItem(summaryStorageKey);
+        } else {
+          const payload = Object.fromEntries(entries);
+          localStorage.setItem(summaryStorageKey, JSON.stringify(payload));
+        }
+      } catch (error) {
+        console.error('Unable to save workspace summaries.', error);
+      }
+    }
+
+    function dispatchSummaryUpdate(stageId) {
+      if (typeof window === 'undefined') {
+        return;
+      }
+
+      window.dispatchEvent(
+        new CustomEvent('ppss-summary-updated', {
+          detail: {
+            stageId,
+            summary: stageSummaries[stageId] || ''
+          }
+        })
+      );
+    }
+
+    async function updateStageSummary(stageId, options = {}) {
+      const { silent = false } = options;
+
+      if (!conversations[stageId] || conversations[stageId].length === 0) {
+        delete stageSummaries[stageId];
+        persistSummaries();
+        dispatchSummaryUpdate(stageId);
+        if (!silent && chatStatus) {
+          chatStatus.textContent = 'Summary cleared for this stage.';
+        }
+        return;
+      }
+
+      const transcriptMessages = conversations[stageId].slice(-10);
+      const transcript = transcriptMessages
+        .map((message) => `${message.role === 'user' ? 'User' : 'ChatGPT'}: ${message.content}`)
+        .join('\n');
+      const stageLabel = stageLabels[stageId] || stageId;
+
+      if (!silent && chatStatus) {
+        chatStatus.textContent = 'Summarizing conversation for the report…';
+      }
+
+      try {
+        const response = await fetch(CHAT_API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${API_KEY}`
+          },
+          body: JSON.stringify({
+            model: CHAT_MODEL,
+            temperature: 0.2,
+            messages: [
+              {
+                role: 'system',
+                content:
+                  'You summarize PPSS workspace conversations. Provide a concise, executive-ready summary (2-3 sentences) capturing key decisions, insights, and follow-ups. Focus on actionable highlights.'
+              },
+              {
+                role: 'user',
+                content: `Stage: ${stageLabel}\nConversation transcript:\n${transcript}\nSummary:`
+              }
+            ],
+            max_tokens: 220
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error(`Summary request failed with status ${response.status}`);
+        }
+
+        const data = await response.json();
+        const summary = data?.choices?.[0]?.message?.content?.trim();
+
+        if (summary) {
+          stageSummaries[stageId] = summary;
+        } else {
+          const fallback = transcriptMessages.filter((entry) => entry.role === 'assistant').pop()?.content || '';
+          if (fallback) {
+            stageSummaries[stageId] = fallback;
+          } else {
+            delete stageSummaries[stageId];
+          }
+        }
+
+        persistSummaries();
+        dispatchSummaryUpdate(stageId);
+
+        if (!silent && chatStatus) {
+          chatStatus.textContent = 'Stage summary updated for the report dashboard.';
+        }
+      } catch (error) {
+        const fallback = transcriptMessages.filter((entry) => entry.role === 'assistant').pop()?.content || '';
+        if (fallback) {
+          stageSummaries[stageId] = fallback;
+        }
+        persistSummaries();
+        dispatchSummaryUpdate(stageId);
+
+        if (!silent && chatStatus) {
+          chatStatus.textContent = 'Could not refresh the report summary. Showing the latest assistant response instead.';
+        }
+
+        console.error('Unable to generate stage summary.', error);
+      }
+    }
+
+    function updateChatStageCopy(stageId) {
+      const copy = chatStageCopy[stageId];
+      if (!copy) {
+        return;
+      }
+
+      chatPanelTitle.textContent = copy.title;
+      chatPanelHelper.textContent = copy.helper;
+
+      const indicatorLabel = Array.from(stepButtons).find((button) => button.dataset.stage === stageId)?.querySelector('.stepper__label')?.textContent;
+      chatStageIndicator.textContent = indicatorLabel || 'Workspace';
+
+      chatStageAnalytics.hidden = stageId !== 'design-plan-evaluation-2';
+    }
+
+    function setActiveStage(stageId) {
+      if (activeStage === stageId) {
+        return;
+      }
+
+      activeStage = stageId;
+
+      stepButtons.forEach((button) => {
+        const isActive = button.dataset.stage === stageId;
+        button.classList.toggle('stepper__item--active', isActive);
+        button.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+
+      stages.forEach((stage) => {
+        const isActive = stage.dataset.stage === stageId;
+        stage.classList.toggle('workspace-stage--active', isActive);
+        stage.toggleAttribute('hidden', !isActive);
+      });
+
+      updateChatStageCopy(stageId);
+      renderConversation();
+      updateStepperProgress(stageId);
+    }
+
+    function renderConversation() {
+      const messages = conversations[activeStage] || [];
+      chatLog.innerHTML = '';
+
+      if (messages.length === 0) {
+        const emptyState = document.createElement('div');
+        emptyState.className = 'chat-log__empty';
+        emptyState.textContent = 'Start a conversation with ChatGPT to receive co-design support for this stage.';
+        chatLog.appendChild(emptyState);
+        return;
+      }
+
+      messages.forEach((message) => {
+        const messageElement = document.createElement('div');
+        messageElement.className = `chat-message chat-message--${message.role}`;
+
+        const roleElement = document.createElement('span');
+        roleElement.className = 'chat-message__role';
+        roleElement.textContent = message.role === 'user' ? 'You' : 'ChatGPT';
+        messageElement.appendChild(roleElement);
+
+        const contentElement = document.createElement('p');
+        contentElement.className = 'chat-message__content';
+        contentElement.textContent = message.content;
+        messageElement.appendChild(contentElement);
+
+        chatLog.appendChild(messageElement);
+      });
+
+      chatLog.scrollTop = chatLog.scrollHeight;
+    }
+
+    async function sendMessage(event) {
+      event.preventDefault();
+      const message = chatTextarea.value.trim();
+      if (!message) return;
+
+      const messages = conversations[activeStage];
+      messages.push({ role: 'user', content: message });
+      persistConversations();
+      renderConversation();
+      chatTextarea.value = '';
+      chatTextarea.focus();
+
+      chatStatus.textContent = 'Requesting response from ChatGPT…';
+      chatForm.classList.add('chat-form--loading');
+
+      try {
+        const response = await fetch(CHAT_API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${API_KEY}`
+          },
+          body: JSON.stringify({
+            model: CHAT_MODEL,
+            messages: [
+              {
+                role: 'system',
+                content: 'You are the PPSS policy design assistant. Respond with concise, actionable insights tailored to the current workflow stage. Reference public sector best practices and co-design methods.'
+              },
+              ...messages
+            ]
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error(`Request failed with status ${response.status}`);
+        }
+
+        const data = await response.json();
+        const aiMessage = data?.choices?.[0]?.message?.content?.trim();
+
+        if (!aiMessage) {
+          throw new Error('No response returned from ChatGPT.');
+        }
+
+        messages.push({ role: 'assistant', content: aiMessage });
+        persistConversations();
+        renderConversation();
+        chatStatus.textContent = 'ChatGPT responded successfully. Updating the report summary…';
+        await updateStageSummary(activeStage);
+      } catch (error) {
+        messages.push({ role: 'assistant', content: `There was an error generating a response: ${error.message}` });
+        persistConversations();
+        renderConversation();
+        chatStatus.textContent = 'Unable to retrieve a response. Please try again.';
+      } finally {
+        chatForm.classList.remove('chat-form--loading');
+      }
+    }
+
+    function updateStepperProgress(stageId) {
+      if (!stepperProgressBar) {
+        return;
+      }
+
+      const stageButtons = Array.from(stepButtons);
+      const activeIndex = stageButtons.findIndex((button) => button.dataset.stage === stageId);
+
+      if (activeIndex === -1) {
+        return;
+      }
+
+      const completion = ((activeIndex + 1) / stageButtons.length) * 100;
+      stepperProgressBar.style.width = `${completion}%`;
+    }
+
+    stepButtons.forEach((button) => {
+      button.addEventListener('click', () => setActiveStage(button.dataset.stage));
+      button.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          setActiveStage(button.dataset.stage);
+        }
+      });
+    });
+
+    analysisTabButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const target = button.dataset.analysisTab;
+        analysisTabButtons.forEach((tabButton) => {
+          const isActive = tabButton === button;
+          tabButton.classList.toggle('analysis-tabs__button--active', isActive);
+          tabButton.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+        analysisPanels.forEach((panel) => {
+          const isActive = panel.dataset.analysisPanel === target;
+          panel.classList.toggle('analysis-panel--active', isActive);
+          panel.toggleAttribute('hidden', !isActive);
+        });
+      });
+    });
+
+    if (conceptForm) {
+      const sampleImages = [
+        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 160'%3E%3Cdefs%3E%3ClinearGradient id='i' x1='0'%25 y1='0'%25 x2='100'%25 y2='100'%25%3E%3Cstop offset='0'%25 stop-color='%23ffefd5'/%3E%3Cstop offset='100'%25 stop-color='%23ffb347'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='220' height='160' rx='18' fill='url(%23i)'/%3E%3Cpath fill='%23fff' opacity='.75' d='M44 108h132v16H44zM60 48h100l-22 40H38z'/%3E%3C/svg%3E",
+        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 160'%3E%3Cdefs%3E%3ClinearGradient id='j' x1='0'%25 y1='100'%25 x2='100'%25 y2='0'%25%3E%3Cstop offset='0'%25 stop-color='%23d7f8ff'/%3E%3Cstop offset='100'%25 stop-color='%2381d4fa'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='220' height='160' rx='18' fill='url(%23j)'/%3E%3Cpath fill='%23fff' opacity='.8' d='M44 56h132v28H44zM44 96h96v16H44zM44 120h72v12H44z'/%3E%3C/svg%3E",
+        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 160'%3E%3Cdefs%3E%3ClinearGradient id='k' x1='0'%25 y1='0'%25 x2='100'%25 y2='100'%25%3E%3Cstop offset='0'%25 stop-color='%23f6f0ff'/%3E%3Cstop offset='100'%25 stop-color='%23cbb6ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='220' height='160' rx='18' fill='url(%23k)'/%3E%3Cpath fill='%23fff' opacity='.78' d='M44 88h132v12H44zM64 52h92l-28 48H36z'/%3E%3C/svg%3E"
+      ];
+
+      conceptForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const formData = new FormData(conceptForm);
+        const prompt = formData.get('concept-prompt');
+        if (!prompt) return;
+
+        conceptStatus.textContent = 'Requesting concept art from ChatGPT…';
+        conceptGallery.innerHTML = '';
+        conceptGallery.classList.add('concept-gallery--loading');
+
+        try {
+          const response = await fetch(IMAGE_API_URL, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${API_KEY}`
+            },
+            body: JSON.stringify({
+              model: IMAGE_MODEL,
+              prompt,
+              size: '1024x1024',
+              n: 4
+            })
+          });
+
+          if (!response.ok) {
+            throw new Error(`ChatGPT image request failed (${response.status})`);
+          }
+
+          const data = await response.json();
+          const images = Array.isArray(data?.data)
+            ? data.data
+                .map((entry) => {
+                  if (entry.url) return entry.url;
+                  if (entry.b64_json) return `data:image/png;base64,${entry.b64_json}`;
+                  return '';
+                })
+                .filter((url) => typeof url === 'string' && url.length > 0)
+            : [];
+
+          if (images.length) {
+            renderConceptImages(images);
+            conceptStatus.textContent = 'ChatGPT returned fresh concepts.';
+            return;
+          }
+
+          renderConceptImages(sampleImages);
+          conceptStatus.textContent = 'Showing sample concepts while waiting for ChatGPT output.';
+        } catch (error) {
+          renderConceptImages(sampleImages);
+          conceptStatus.textContent = `Using example concepts because the ChatGPT image API was unavailable (${error.message}).`;
+        } finally {
+          conceptGallery.classList.remove('concept-gallery--loading');
+        }
+      });
+    }
+
+    function renderConceptImages(images) {
+      if (!conceptGallery) return;
+      conceptGallery.innerHTML = '';
+      images.slice(0, 4).forEach((url, index) => {
+        const figure = document.createElement('figure');
+        figure.className = 'concept-card';
+        const img = document.createElement('img');
+        img.className = 'concept-card__image';
+        img.src = typeof url === 'string' ? url : url?.url || '';
+        img.alt = 'Generated PPSS concept visual';
+        figure.appendChild(img);
+        const caption = document.createElement('figcaption');
+        caption.className = 'concept-card__caption';
+        caption.textContent = index === 0 ? 'Resident onboarding hub' : index === 1 ? 'Mobile-first PPSS assistant' : index === 2 ? 'Community partnership studio' : 'Policy analytics cockpit';
+        figure.appendChild(caption);
+        conceptGallery.appendChild(figure);
+      });
+    }
+
+    chatForm.addEventListener('submit', sendMessage);
+
+    initializeWorkspaceState();
+    updateChatStageCopy(activeStage);
+    renderConversation();
+    updateStepperProgress(activeStage);
+  </script>
+</body>
+</html>
